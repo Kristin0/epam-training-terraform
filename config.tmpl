@@ -1,0 +1,21 @@
+Host *
+    IdentityFile ~/.ssh/id_rsa
+    ServerAliveInterval 240
+    ServerAliveCountMax 2
+    TCPKeepAlive yes
+
+Host bastion
+    User ubuntu
+    Hostname ${bastion_hostname}
+    ForwardAgent yes
+    Port 22
+
+%{ for ip in private-ip ~}
+
+Host wordpress_${ip}
+    User ubuntu
+    HostName ${ip}
+    Port 22
+    ProxyJump ubuntu@${bastion_hostname}
+%{ endfor ~}
+
