@@ -1,0 +1,8 @@
+
+[bastion]
+bastion ansible_host=${bastion-ip} # ${bastion-id}
+
+[servers]
+%{ for index, dns in private-dns ~}
+wordpress_${private-ip[index]} # ansible_host=${private-ip[index]} # ${private-id[index]}
+%{ endfor ~}
