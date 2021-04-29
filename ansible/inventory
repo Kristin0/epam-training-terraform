@@ -1,0 +1,7 @@
+
+[bastion]
+bastion ansible_host=3.12.148.169 # i-0ba44a2c5c0eaa326
+
+[servers]
+wordpress_10.16.79.172 # ansible_host=10.16.79.172 # i-032c91aeba153665d
+wordpress_10.16.93.219 # ansible_host=10.16.93.219 # i-08b79c38150075f02

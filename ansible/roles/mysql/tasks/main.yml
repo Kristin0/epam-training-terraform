@@ -1,0 +1,75 @@
+---
+# tasks file for mysql
+  
+  - name: Install mysql-client
+    apt:
+      name:
+       'mysql-client'
+      update_cache: true
+    become: true
+
+
+  - name: Install pip3
+    apt: 
+      name: python3-pip
+    become: true
+    
+  - name: Make sure pymysql is present
+    pip:
+      name: pymysql
+      state: present
+    become: true
+ 
+  
+
+
+    #  - name: Update mysql root password
+    #    mysql_user:
+    #        login_host: '{{ mysql_login_host }}'
+    #        login_user: '{{ mysql_root_user }}'
+    #        login_password: '{{ mysql_root_password }}'
+    #        user: '{{ mysql_root_user }}'
+    #        password: '{{ mysql_root_password }}'
+    #        # login_unix_socket: /var/run/mysqld/mysqld.sock
+    #    become: true
+    #
+
+  - name: Remove test database
+    mysql_db: 
+      name: test 
+      state: absent
+      login_host: '{{ mysql_login_host }}'
+      login_user: '{{ mysql_root_user }}'
+      login_password: '{{ mysql_root_password }}'
+    become: true
+
+  - name: Remove anonymous users 
+    mysql_user: 
+      login_host: '{{ mysql_login_host }}'
+      user: ''
+      state: absent
+      login_user: '{{ mysql_root_user }}'
+      login_password: '{{ mysql_root_password }}'
+    become: true
+  
+  - name: Create a new database 
+    mysql_db:
+      login_host: '{{ mysql_login_host }}'
+      login_user: '{{ mysql_root_user }}' 
+      login_password: '{{ mysql_root_password }}'
+      name: '{{ mysql_database_name }}' 
+      state: present
+    become: true
+
+  - name: Create database user
+    mysql_user:
+      login_host: '{{ mysql_login_host }}'
+      state: present
+      login_user: '{{ mysql_root_user }}' 
+      login_password: '{{ mysql_root_password }}'
+      name: '{{ mysql_user }}' 
+      password: '{{ mysql_user_password }}'
+      host: '{{ mysql_user_host }}'
+      priv:
+        "{{ mysql_database_name }}.*:ALL,GRANT"
+    become: true

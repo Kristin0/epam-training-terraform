@@ -1,0 +1,14 @@
+mysql_user: 'wp_user'
+mysql_database_name:  'wp_db'
+mysql_user_password:  'user'
+mysql_root_password : "pa$$w0rd"
+mysql_root_user: "admin"
+mysql_login_host: "db.ch5tdl36j9kx.us-east-2.rds.amazonaws.com"
+mysql_user_host: '' # your web server private ip
+
+# version vars
+nginx_site_path: 'wordpress'
+nginx_version: '1.18.0' #-0ubuntu1
+mysql_server_version: '8.0.23'
+php_version: '7.4' #-4ubuntu2.4
+php_fpm_version: '7.4'

@@ -1,0 +1,17 @@
+---
+- name: Simple RDS database creation
+  hosts: bastion
+  remote_user: ubuntu
+  roles:
+    - mysql
+
+- name: Simple wordpress installation 
+  hosts: servers
+  remote_user: ubuntu
+  gather_facts: true
+  roles:
+    - nginx
+    - php
+    - wordpress
+
+

@@ -1,0 +1,21 @@
+---
+# tasks file for php
+  - name: Install php
+    apt:
+      name: 'php{{ php_version }}={{ php_version }}.3-4ubuntu2.4'
+      state: present
+      update_cache: true
+    become: true
+
+  - name: Install php-mysql
+    apt:
+      name: 'php-mysql=2:{{ php_version }}+75'
+      state: present
+      update_cache: true
+    become: true
+
+  - name: Install php-fpm
+    apt:
+      name: 'php-fpm=2:{{ php_fpm_version }}+75'
+      state: present
+    become: true

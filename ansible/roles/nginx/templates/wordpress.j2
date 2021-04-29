@@ -1,0 +1,23 @@
+server {
+	listen {{ nginx_port_number }} default_server;
+	listen [::]:{{ nginx_port_number }} default_server;
+
+		root /var/www/{{ nginx_site_path }};
+
+	index index.html index.htm index.nginx-debian.html index.php;
+
+	server_name {{ nginx_server_name }};
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+
+
+location ~ \.php$ {
+	include snippets/fastcgi-php.conf;
+
+	fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+}
+
+}
