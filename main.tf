@@ -15,7 +15,7 @@ module "key_pair" {
 
 resource "null_resource" "get_keys" {
   provisioner "local-exec" {
-    command     = "echo '${tls_private_key.this.private_key_pem}' > ~/.ssh/private_key.pem && chmod 400 private_key.pem"
+    command     = "echo '${tls_private_key.this.private_key_pem}' > ~/.ssh/private_key.pem && chmod 400 ~/.ssh/private_key.pem"
   }
 }
 
