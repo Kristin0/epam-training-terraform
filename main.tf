@@ -2,6 +2,17 @@ provider "aws" {
   region = var.region
 }
 
+resource "tls_private_key" "this" {
+  algorithm = "RSA"
+}
+
+module "key_pair" {
+  source = "terraform-aws-modules/key-pair/aws"
+
+  key_name   = "bastion"
+  public_key = tls_private_key.this.public_key_openssh
+}
+
 terraform {
   backend "s3" {
     bucket = "epam-terraform-state"
