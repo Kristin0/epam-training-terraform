@@ -9,8 +9,14 @@ resource "tls_private_key" "this" {
 module "key_pair" {
   source = "terraform-aws-modules/key-pair/aws"
 
-  key_name   = "bastion"
+  // key_name   = "bastion"
   public_key = tls_private_key.this.public_key_openssh
+}
+
+resource "null_resource" "get_keys" {
+  provisioner "local-exec" {
+    command     = "echo '${tls_private_key.this.private_key_pem}' > ./private_key.pem && chmod 400 private_key.pem"
+  }
 }
 
 terraform {
@@ -39,6 +45,7 @@ module "server" {
   public_ip_ranges = module.vpc.public_ip_ranges
   subnet_public_ids = module.vpc.subnet_public_ids
   subnet_private_ids = module.vpc.subnet_private_ids
+  key_name = module.key_pair.key_pair_key_name
 }
 
 resource "null_resource" "command" {
