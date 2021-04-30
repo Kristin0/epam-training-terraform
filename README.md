@@ -14,4 +14,4 @@ Then clone current repository and
 
 Take link to load balancer and then enter   
 
-`` cd ansible/ && ansible-playbook wordpress.yml -i inventory ``  
+`` cd ansible/ && ansible-playbook wordpress.yml -i inventory --private-key ../private_key.pem``  
