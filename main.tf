@@ -25,7 +25,7 @@ terraform {
     key = "epam/terraform.tfstate"
     region = "us-east-2"
   }
-}
+} 
 
 module "vpc" {
   source = "github.com/Kristin0/terraform-modules/aws_network"
