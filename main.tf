@@ -50,7 +50,7 @@ module "server" {
 
 resource "null_resource" "command" {
   provisioner "local-exec" {
-    command = "mv config ~/.ssh/"
+    command = "mv config ~/.ssh/ && chmod 664 ~/.ssh/config"
   }
 
   depends_on = [
