@@ -3,6 +3,8 @@ Host *
     ServerAliveInterval 240
     ServerAliveCountMax 2
     TCPKeepAlive yes
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
 
 Host bastion
     User ubuntu
